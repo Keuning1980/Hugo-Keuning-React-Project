@@ -1,23 +1,24 @@
+import { useState } from "react";
 import { data } from "../utils/data";
-import { RecipeCard } from "../components/ReCipeCard";
-import { Textinput } from "../components/ui/textInput";
+import { RecipeCard } from "../components/RecipeCard";
 import { RecipeSearch } from "../components/RecipeSearch";
 
+export const RecipeListPage = ({clickFn}) => {
+  const [searchResults, setSearchResults] = useState([]);
 
+  const handleSearch = (results) => {
+    setSearchResults(results);
 
-export const RecipeListPage = ({ clickFn }) => {
+ 
+  };
+  console.log(typeof clickFn)
   return (
     <>
-       <RecipeSearch/>
-
-      {data.hits.map((item) => (
-        <RecipeCard clickFn={clickFn} item={item} key={item.recipe.label} />
-   
-      )
-     
-      
-      
-      )}
+      <RecipeSearch onSearch={handleSearch} />
+      {searchResults.map((item) => (
+        <RecipeCard clickFn={clickFn} item={item} key={item.recipe.label}/>
+      ))}
     </>
   );
 };
+
